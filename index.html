@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+<head>
+<title>Cruzando la calle Simulator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>
+</head>
+
+<body>
+<h1>Ausencia de via publica</h1>
+<script>
+let game_w = 800;
+let game_h = 600;
+let config = {
+	width: game_w,
+	height: game_h,
+	scene: {
+		preload: preload,
+		create: create,
+		update: update,
+	}
+}
+
+let game = new Phaser.Game(config);
+let bg_img;
+let player_img;
+let blue_car;
+let green_car;
+let formula_car;
+let yellow_truck;
+
+let cursors;
+
+let bluecar_speed = 2;
+let formula_speed = 4;
+let greencar_speed = 2.75;
+let yellowtruck_speed = 1.5;
+
+let scale_size = 3;
+
+function preload()
+{
+	this.load.image("background", "background.png");
+	this.load.image("character","character.png");
+	this.load.image("riot","riot.png");
+	this.load.image("sedan","sedan.png");
+	this.load.image("formula","formula.png");
+	this.load.image("truck","truck.png");
+}
+
+function create()
+{
+	cursors = this.input.keyboard.createCursorsKeys();
+
+	bg_img = this.add.image(game_w/2,game_h/2, "background");
+	player_img = this.add.image(400,40, "character");
+	blue_car = this.add.image(40,150, "riot");
+	green_car = this.add.image(game_w-40,360, "sedan");
+	formula_car = this.add.image(40,250, "formula");
+	yellow_truck = this.add.image(game_w-40,455, "truck");
+	
+	blue_car.setScale(scale_size);
+	green_car.setScale(scale_size);
+	formula_car.setScale(scale_size);
+	yellow_truck.setScale(scale_size);
+
+	green_car.flipX = true;
+	yellow_truck.flipX = true;
+}
+
+
+function update()
+{
+	if (cursors)
+
+	blue_car.x += bluecar_speed;
+	formula_car.x += formula_speed;
+	green_car.x -= greencar_speed;
+	yellow_truck.x -= yellowtruck_speed;
+
+	if (blue_car.x > 870){
+		blue_car = this.add.image(0,150, "riot");
+		blue_car.setScale(scale_size);
+	}
+
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
