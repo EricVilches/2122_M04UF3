@@ -9,11 +9,19 @@
 <body>
 <h1>Ausencia de via publica</h1>
 <script>
+
 let game_w = 800;
 let game_h = 600;
+
 let config = {
 	width: game_w,
 	height: game_h,
+	physics: {
+			default: 'arcade',
+			arcade: {
+				debug: true
+			}
+	},
 	scene: {
 		preload: preload,
 		create: create,
@@ -35,6 +43,7 @@ let bluecar_speed = 2;
 let formula_speed = 4;
 let greencar_speed = 2.75;
 let yellowtruck_speed = 1.5;
+let player_speed = 2;
 
 let scale_size = 3;
 
@@ -46,6 +55,7 @@ function preload()
 	this.load.image("sedan","sedan.png");
 	this.load.image("formula","formula.png");
 	this.load.image("truck","truck.png");
+
 }
 
 function create()
@@ -66,43 +76,42 @@ function create()
 
 	green_car.flipX = true;
 	yellow_truck.flipX = true;
+
+	
+
 }
 
 
 function update()
 {
-	if (cursors)
+	if(cursors.up.isDown){
+		player_img.y -= player_speed;
+	}
+	else if (cursors.down.isDown){
+		player_img.y += player_speed;
+	}
+	else if (cursors.left.isDown){
+		player_img.x -= player_speed;
+	}
+	else if (cursors.right.isDown){
+		player_img.x += player_speed;
+	}
 
+	if (cursors){
+	
 	blue_car.x += bluecar_speed;
 	formula_car.x += formula_speed;
 	green_car.x -= greencar_speed;
 	yellow_truck.x -= yellowtruck_speed;
-
+	}
 	if (blue_car.x > 870){
 		blue_car = this.add.image(0,150, "riot");
 		blue_car.setScale(scale_size);
 	}
 
+
+
 }
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 </body>
